@@ -42,7 +42,7 @@ def mark_tasks_complete(tasks):
   try:
     tasks_number = int(input("Enter the number of the tasks to marak as complete: ").strip())
 
-    if 1 <= tasks_number <= len(tasks):
+    if 1 <= tasks_number <= len(tasks["tasks"]):
       tasks["tasks"][tasks_number -1]["complete"] = True
       save_tasks(tasks)
       print("Tasks marak as complete.")
@@ -50,6 +50,34 @@ def mark_tasks_complete(tasks):
       print("Invalide tasks number.")
   except:
     print("Enter valide number.")
+
+def remove_tasks(tasks):
+  view_tasks(tasks)
+  try:
+    tasks_number = int(input("Enter the number of the task to remove: ").strip())
+
+    if 1 <= tasks_number <= len(tasks["tasks"]):
+      removed_task = tasks["tasks"].pop(tasks_number - 1)
+      save_tasks(tasks)
+      print(f"Task '{removed_task['description']}' removed.")
+    else:
+      print("Invalide tasks number.")
+  except:
+    print("Enter valide number.")
+
+def mark_tasks_incomplete(tasks):
+  view_tasks(tasks)
+  try:
+    tasks_number = int(input("Enter the number of the task to mark as incomplete: ").strip())
+
+    if 1 <= tasks_number <= len(tasks["tasks"]):
+      tasks["tasks"][tasks_number - 1]["complete"] = False
+      save_tasks(tasks)
+      print("Task marked as incomplete.")
+    else:
+      print("Invalid task number.")
+  except:
+    print("Enter valid number.")
 
 def main():
   tasks = lode_tasks()
@@ -59,7 +87,9 @@ def main():
     print("1. View Tasks")
     print("2. Add Tasks")
     print("3. Complete Tasks")
-    print("4. Exit")
+    print("4. Incomplete Tasks")
+    print("5. Remove Tasks")
+    print("6. Exit")
 
     choice = input("Enter your choice: ").strip()
 
@@ -70,6 +100,10 @@ def main():
     elif choice == "3":
       mark_tasks_complete(tasks)
     elif choice == "4":
+      mark_tasks_incomplete(tasks)
+    elif choice == "5":
+      remove_tasks(tasks) 
+    elif choice == "6":
       print("Goodbye!!")
       break
     else:
