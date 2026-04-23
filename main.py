@@ -9,8 +9,12 @@ def lode_tasks():
   except:
     return { "tasks": []}
 
-def save_tasks():
-  pass
+def save_tasks(tasks):
+  try:
+    with open(file_name, "w") as file:
+      json.dump(tasks, file)
+  except:
+    print("faile to save")
 
 def view_tasks():
   pass
