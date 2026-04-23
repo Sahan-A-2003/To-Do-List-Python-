@@ -1,5 +1,13 @@
+import json
+
+file_name = "todo_list.json"
+
 def lode_tasks():
-  pass
+  try:
+    with open(file_name, "r") as file:
+      return json.load(file)
+  except:
+    return { "tasks": []}
 
 def save_tasks():
   pass
